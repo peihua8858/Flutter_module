@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:flutter_module/BasePageState.dart';
+import 'package:flutter_module/BasePageWidget.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-// import 'package:json_serializable/json_serializable.dart';
 
 class PageHome extends BasePageWidget {
   const PageHome(super.title, {super.key});

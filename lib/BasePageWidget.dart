@@ -5,6 +5,7 @@ abstract class BasePageWidget extends StatefulWidget {
   const BasePageWidget(this.title, {super.key});
 
   final String title;
+
 }
 
 abstract class BasePageState<T extends BasePageWidget> extends State<T> {
@@ -24,7 +25,10 @@ abstract class BasePageState<T extends BasePageWidget> extends State<T> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Theme
+            .of(context)
+            .appBarTheme
+            .backgroundColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

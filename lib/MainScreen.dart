@@ -34,8 +34,8 @@ class _MainScreenPageState extends State<MainScreenPage> {
   @override
   void initState() {
     super.initState();
-    mPages.add(PageHome('首页'));
-    mPages .add(PageBusiness('商城'));
+    mPages.add(PageHome('列表布局'));
+    mPages .add(PageBusiness('网格布局'));
     mPages .add(PageSchool('课程'));
     mPages .add(PageAccount('个人中心'));
   }
@@ -50,12 +50,12 @@ class _MainScreenPageState extends State<MainScreenPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: 'Home',
+            icon: Icon(Icons.list_alt),
+            label: 'List View',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business_rounded),
-            label: 'Business',
+            icon: Icon(Icons.grid_view),
+            label: 'Grid View',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school_rounded),

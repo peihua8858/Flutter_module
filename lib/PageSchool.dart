@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:flutter_module/BasePageState.dart';
+import 'package:flutter_module/BasePageWidget.dart';
 
 class PageSchool extends BasePageWidget {
   const PageSchool(super.title, {super.key});
