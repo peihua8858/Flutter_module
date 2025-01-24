@@ -15,7 +15,6 @@ class PageBloc extends BasePageWidget {
 }
 
 class _PageBlocState extends BasePageState<PageBloc, HomeBloc> {
-
   @override
   void initState() {
     super.initState();
@@ -29,35 +28,40 @@ class _PageBlocState extends BasePageState<PageBloc, HomeBloc> {
       print("PageBloc buildBody state:$state");
       return Center(
           child: GridView.count(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            controller: new ScrollController(keepScrollOffset: false),
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            children: List.generate(state.playList.length, (index) => itemViews(state.playList,index)),
-          )
-      );
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        controller: new ScrollController(keepScrollOffset: false),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        children: List.generate(
+            state.playList.length, (index) => itemViews(state.playList, index)),
+      ));
     });
   }
 
-  Widget itemViews(List<BusinessItem> items,int index) {
+  Widget itemViews(List<BusinessItem> items, int index) {
     var item = items[index];
-    return GridTile(
-        child: Image(image: Image
-            .network(item.imageUrl)
-            .image),
-        footer: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.transparent, Colors.black],
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: GridTile(
+          child: Image(image: Image.network(item.imageUrl).image),
+          footer: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.transparent, Colors.black],
+                ),
               ),
-            ),
-            child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text(item.title,
-                    style: TextStyle(fontSize: 20, color: Colors.white)))));
+              child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(item.title,
+                      style: TextStyle(fontSize: 20, color: Colors.white))))),
+    );
   }
 }
