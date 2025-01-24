@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeState {
   List<BusinessItem> get playList => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
+  bool get hasMore => throw _privateConstructorUsedError;
   Exception? get error => throw _privateConstructorUsedError;
 
   /// Create a copy of HomeState
@@ -32,7 +32,7 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
-  $Res call({List<BusinessItem> playList, bool isLoading, Exception? error});
+  $Res call({List<BusinessItem> playList, bool hasMore, Exception? error});
 }
 
 /// @nodoc
@@ -51,7 +51,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   @override
   $Res call({
     Object? playList = null,
-    Object? isLoading = null,
+    Object? hasMore = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -59,9 +59,9 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.playList
           : playList // ignore: cast_nullable_to_non_nullable
               as List<BusinessItem>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
               as bool,
       error: freezed == error
           ? _value.error
@@ -79,7 +79,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       __$$HomeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<BusinessItem> playList, bool isLoading, Exception? error});
+  $Res call({List<BusinessItem> playList, bool hasMore, Exception? error});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? playList = null,
-    Object? isLoading = null,
+    Object? hasMore = null,
     Object? error = freezed,
   }) {
     return _then(_$HomeStateImpl(
@@ -104,9 +104,9 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value._playList
           : playList // ignore: cast_nullable_to_non_nullable
               as List<BusinessItem>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
               as bool,
       error: freezed == error
           ? _value.error
@@ -121,7 +121,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 class _$HomeStateImpl with DiagnosticableTreeMixin implements _HomeState {
   _$HomeStateImpl(
       {final List<BusinessItem> playList = const [],
-      this.isLoading = false,
+      this.hasMore = false,
       this.error = null})
       : _playList = playList;
 
@@ -136,14 +136,14 @@ class _$HomeStateImpl with DiagnosticableTreeMixin implements _HomeState {
 
   @override
   @JsonKey()
-  final bool isLoading;
+  final bool hasMore;
   @override
   @JsonKey()
   final Exception? error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState(playList: $playList, isLoading: $isLoading, error: $error)';
+    return 'HomeState(playList: $playList, hasMore: $hasMore, error: $error)';
   }
 
   @override
@@ -152,7 +152,7 @@ class _$HomeStateImpl with DiagnosticableTreeMixin implements _HomeState {
     properties
       ..add(DiagnosticsProperty('type', 'HomeState'))
       ..add(DiagnosticsProperty('playList', playList))
-      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('hasMore', hasMore))
       ..add(DiagnosticsProperty('error', error));
   }
 
@@ -162,14 +162,13 @@ class _$HomeStateImpl with DiagnosticableTreeMixin implements _HomeState {
         (other.runtimeType == runtimeType &&
             other is _$HomeStateImpl &&
             const DeepCollectionEquality().equals(other._playList, _playList) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_playList), isLoading, error);
+      const DeepCollectionEquality().hash(_playList), hasMore, error);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -183,13 +182,13 @@ class _$HomeStateImpl with DiagnosticableTreeMixin implements _HomeState {
 abstract class _HomeState implements HomeState {
   factory _HomeState(
       {final List<BusinessItem> playList,
-      final bool isLoading,
+      final bool hasMore,
       final Exception? error}) = _$HomeStateImpl;
 
   @override
   List<BusinessItem> get playList;
   @override
-  bool get isLoading;
+  bool get hasMore;
   @override
   Exception? get error;
 

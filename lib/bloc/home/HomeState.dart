@@ -7,7 +7,7 @@ part 'HomeState.freezed.dart';
 class HomeState extends BaseBlocState with _$HomeState {
   factory HomeState({
     @Default([]) List<BusinessItem> playList,
-    @Default(false) bool isLoading,
+    @Default(false) bool hasMore,
     @Default(null) Exception? error,
   }) = _HomeState;
 }

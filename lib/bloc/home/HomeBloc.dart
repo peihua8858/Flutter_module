@@ -44,7 +44,7 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
       List<BusinessItem> playList = await _repository.playlist("");
       print("33 HomeBloc _onHomePageInitiated playList:$playList");
       // 获取数据后触发页面更新
-      return HomeState(playList: playList);
+      return HomeState(playList: playList, hasMore: true);
     } catch (err) {
       addError(err, StackTrace.current);
       return HomeState(error: Exception(err));
@@ -53,9 +53,12 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
 
   Future<HomeState> _onHomePageLoadMore() async {
     try {
+      List<BusinessItem> oldList = [];
+      oldList.addAll(state.playList);
       List<BusinessItem> playList = await _repository.playlist("");
+      oldList.addAll(playList);
       // 获取数据后触发页面更新
-      return HomeState(playList: playList);
+      return HomeState(playList: oldList, hasMore: true);
     } catch (err) {
       addError(err, StackTrace.current);
       return HomeState(error: Exception(err));
