@@ -1,22 +1,24 @@
-import 'package:flutter_module/bloc/base/BaseEvent.dart';
-import 'Completer.dart';
-class HomeEvent extends BaseEvent {
-  const HomeEvent();
+import 'package:flutter_module/bloc/base/BaseBlocEvent.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+
+part 'HomeEvent.freezed.dart';
+
+abstract class HomeEvent extends BaseBlocEvent {
+  HomeEvent();
 }
 
-class HomePageInitiated extends HomeEvent {
-  const HomePageInitiated(this.status);
-
-  final AuthenticationStatus status;
+@freezed
+class HomePageInitiated extends HomeEvent with _$HomePageInitiated {
+  const factory HomePageInitiated() = _HomePageInitiated;
 }
 
-class HomePageRefreshed extends HomeEvent {
-  const HomePageRefreshed(this.completer);
-
-  Completer<void> completer;
+@freezed
+class HomePageRefreshed extends HomeEvent with _$HomePageRefreshed {
+  const factory HomePageRefreshed() = _HomePageRefreshed;
 }
 
-class HomePageLoadMore extends HomeEvent {
-  const HomePageLoadMore(this.completer);
-  Completer<void> completer;
+@freezed
+class HomePageLoadMore extends HomeEvent with _$HomePageLoadMore {
+  const factory HomePageLoadMore() = _HomePageLoadMore;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:flutter_module/PageHome.dart';
+import 'package:flutter_module/bloc/home/ui/PageBloc.dart';
+import 'package:flutter_module/PageListView.dart';
 import 'package:flutter_module/PageBusiness.dart';
 import 'package:flutter_module/PageSchool.dart';
 import 'package:flutter_module/PageAccount.dart';
@@ -34,7 +35,8 @@ class _MainScreenPageState extends State<MainScreenPage> {
   @override
   void initState() {
     super.initState();
-    mPages.add(PageHome('列表布局'));
+    mPages.add(PageBloc('Bloc框架'));
+    mPages.add(PageListView('列表布局'));
     mPages .add(PageBusiness('网格布局'));
     mPages .add(PageSchool('课程'));
     mPages .add(PageAccount('个人中心'));
@@ -49,6 +51,10 @@ class _MainScreenPageState extends State<MainScreenPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Bloc',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt),
             label: 'List View',

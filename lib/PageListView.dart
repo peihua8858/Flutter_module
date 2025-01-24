@@ -4,14 +4,14 @@ import 'package:flutter_module/BasePageWidget.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class PageHome extends BasePageWidget {
-  const PageHome(super.title, {super.key});
+class PageListView extends BasePageWidget {
+  const PageListView(super.title, {super.key});
 
   @override
-  State<PageHome> createState() => _PageHomeState();
+  State<PageListView> createState() => _PageListViewState();
 }
 
-class _PageHomeState extends BasePageState<PageHome> {
+class _PageListViewState extends BasePageState<PageListView> {
   List<ItemBean> items = [];
 
   void refreshData() async {

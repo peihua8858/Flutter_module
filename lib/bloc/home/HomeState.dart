@@ -1,10 +1,13 @@
-
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_module/bloc/base/BaseBlocState.dart';
-
-part 'home_state.freezed.dart';
+import 'package:flutter_module/BusinessItem.dart';
+part 'HomeState.freezed.dart';
+@freezed
 class HomeState extends BaseBlocState with _$HomeState {
   factory HomeState({
-    @Default([]) List<PlayListItemData> playList,
+    @Default([]) List<BusinessItem> playList,
+    @Default(false) bool isLoading,
+    @Default(null) Exception? error,
   }) = _HomeState;
 }

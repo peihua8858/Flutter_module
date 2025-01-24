@@ -1,6 +1,5 @@
+import 'package:flutter_module/BusinessItem.dart';
 
-class Repository{
-  String getData(){
-    return "Hello World";
-  }
+abstract class Repository {
+  Future<List<BusinessItem>> playlist(String id);
 }

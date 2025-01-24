@@ -1,39 +1,94 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_module/bloc/base/BaseBloc.dart';
 import 'package:flutter_module/bloc/home/HomeEvent.dart';
 import 'package:flutter_module/bloc/home/HomeState.dart';
 import 'package:flutter_module/repository/Repository.dart';
+import 'package:flutter_module/BusinessItem.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable()
+@lazySingleton
 class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
-  const HomeBloc(this._repository) : super(HomeState()) {
-    {
-      on<HomePageInitiated>(
-        _onHomePageInitiated,
-        transformer: log(),
-      );
+  HomeBloc(this._repository) : super(HomeState()) {
+    on<HomePageInitiated>((event, emit) async {
+      print("HomeBloc _onHomePageInitiated");
+      emit(await _onHomePageInitiated());
+    });
+    on<HomePageLoadMore>((event, emit) async {
+      emit(await _onHomePageLoadMore());
+    });
+    on<HomePageRefreshed>((event, emit) async {
+      emit(await _onHomePageRefreshed());
+    });
+  }
 
-      on<HomePageLoadMore>(
-        _onHomePageLoadMore,
-        transformer: log(),
-      );
+  // @override
+  // Stream<HomeState> mapEventToState(
+  //     HomeEvent event,
+  //     ) async* {
+  //   if (event is HomePageInitiated) {
+  //     yield await _onHomePageInitiated();
+  //   } else if (event is HomePageLoadMore) {
+  //     yield await _onHomePageLoadMore();
+  //   }else if (event is HomePageRefreshed) {
+  //     yield await  _onHomePageRefreshed();
+  //   }
+  // }
+  final Repository _repository;
 
-      on<HomePageRefreshed>(
-        _onHomePageRefreshed,
-        transformer: log(),
-      );
-    }
-
-    final Repository _repository;
-
-    FutureOr<void> _onHomePageInitiated(HomePageInitiated event,
-        Emitter<HomeState> emit) async {
-      try {
-        List<PlayListItemData> playList = await _repository.playlist("");
-        // 获取数据后触发页面更新
-        emit(state.copyWith(playList: playList));
-      } catch (err) {
-        Log.e(err);
-      }
+  Future<HomeState> _onHomePageInitiated() async {
+    try {
+      List<BusinessItem> playList = await _repository.playlist("");
+      print("33 HomeBloc _onHomePageInitiated playList:$playList");
+      // 获取数据后触发页面更新
+      return HomeState(playList: playList);
+    } catch (err) {
+      addError(err, StackTrace.current);
+      return HomeState(error: Exception(err));
     }
   }
+
+  Future<HomeState> _onHomePageLoadMore() async {
+    try {
+      List<BusinessItem> playList = await _repository.playlist("");
+      // 获取数据后触发页面更新
+      return HomeState(playList: playList);
+    } catch (err) {
+      addError(err, StackTrace.current);
+      return HomeState(error: Exception(err));
+    }
+  }
+
+  Future<HomeState> _onHomePageRefreshed() async {
+    try {
+      List<BusinessItem> playList = await _repository.playlist("");
+      // 获取数据后触发页面更新
+      return HomeState(playList: playList);
+    } catch (err) {
+      addError(err, StackTrace.current);
+      return HomeState(error: Exception(err));
+    }
+  }
+
+  @override
+  void onChange(Change<HomeState> change) {
+    super.onChange(change);
+    print("HomeBloc change:$change");
+  }
+
+  @override
+  void onEvent(HomeEvent event) {
+    // TODO: implement onEvent
+    super.onEvent(event);
+    print("HomeBloc onEvent:$event");
+  }
+
+  @override
+  void onTransition(Transition<HomeEvent, HomeState> transition) {
+    super.onTransition(transition);
+    print("HomeBloc onTransition:$transition");
+  }
+}
