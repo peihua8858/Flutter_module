@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_module/bloc/base/BaseBloc.dart';
 import 'package:flutter_module/bloc/home/HomeEvent.dart';
 import 'package:flutter_module/bloc/home/HomeState.dart';
@@ -18,6 +15,8 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
       emit(await _onHomePageInitiated());
     });
     on<HomePageLoadMore>((event, emit) async {
+      //延迟2秒
+      await Future.delayed(const Duration(seconds: 2));
       emit(await _onHomePageLoadMore());
     });
     on<HomePageRefreshed>((event, emit) async {
@@ -53,12 +52,12 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
 
   Future<HomeState> _onHomePageLoadMore() async {
     try {
-      List<BusinessItem> oldList = [];
-      oldList.addAll(state.playList);
+      List<BusinessItem> newList = [];
+      newList.addAll(state.playList);
       List<BusinessItem> playList = await _repository.playlist("");
-      oldList.addAll(playList);
+      newList.addAll(playList);
       // 获取数据后触发页面更新
-      return HomeState(playList: oldList, hasMore: true);
+      return HomeState(playList: newList, hasMore: true);
     } catch (err) {
       addError(err, StackTrace.current);
       return HomeState(error: Exception(err));
@@ -69,7 +68,7 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     try {
       List<BusinessItem> playList = await _repository.playlist("");
       // 获取数据后触发页面更新
-      return HomeState(playList: playList);
+      return HomeState(playList: playList, hasMore: true);
     } catch (err) {
       addError(err, StackTrace.current);
       return HomeState(error: Exception(err));

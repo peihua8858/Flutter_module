@@ -52,7 +52,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
+            icon: Icon(Icons.grid_view),
             label: 'Bloc',
           ),
           BottomNavigationBarItem(

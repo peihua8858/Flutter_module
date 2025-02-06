@@ -15,12 +15,14 @@ abstract class BasePageWidget extends StatefulWidget with LogMixin {
 abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
     extends State<T> with LogMixin {
   late final B bloc = GetIt.instance.get<B>();
-  ScrollController _scrollController = ScrollController(); //listview的控制器
+  final ScrollController _scrollController = ScrollController(); //listview的控制器
   Widget buildBody(BuildContext context);
 
   int get counter => _counter;
   int _counter = 0;
+
   ScrollController get scrollController => _scrollController;
+
   @override
   void initState() {
     super.initState();
@@ -34,9 +36,8 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
 
   void onFtButtonClick() {
     print("onButtonClick");
-    setState(() {
-      _counter++;
-    });
+    scrollController.animateTo(0,
+        duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
   @override
@@ -66,7 +67,7 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
           floatingActionButton: FloatingActionButton.small(
             onPressed: onFtButtonClick,
             tooltip: 'Increment',
-            child: const Icon(Icons.add),
+            child: const Icon(Icons.arrow_upward),
           ),
         ));
   }
