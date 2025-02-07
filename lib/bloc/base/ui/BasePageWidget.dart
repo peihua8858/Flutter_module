@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_module/bloc/base/BaseBloc.dart';
 import 'package:flutter_module/bloc/home/HomeEvent.dart';
@@ -17,9 +16,6 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
   late final B bloc = GetIt.instance.get<B>();
   final ScrollController _scrollController = ScrollController(); //listview的控制器
   Widget buildBody(BuildContext context);
-
-  int get counter => _counter;
-  int _counter = 0;
 
   ScrollController get scrollController => _scrollController;
 
@@ -40,8 +36,14 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
+  Future<void> _onRefresh() async {
+    print("onRefresh");
+    bloc.add(HomePageRefreshed());
+    return bloc.waiteRefresh();
+  }
+
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     return BlocProvider(
         lazy: false,
         create: (context) => bloc,
@@ -59,9 +61,7 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
             ),
           ),
           body: RefreshIndicator(
-            onRefresh: () async {
-              bloc.add(HomePageRefreshed());
-            },
+            onRefresh: () => _onRefresh(),
             child: buildBody(context),
           ),
           floatingActionButton: FloatingActionButton.small(

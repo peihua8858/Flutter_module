@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_module/bloc/base/BaseBloc.dart';
 import 'package:flutter_module/bloc/home/HomeEvent.dart';
@@ -9,6 +11,8 @@ import 'package:injectable/injectable.dart';
 @Injectable()
 @lazySingleton
 class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
+
+
   HomeBloc(this._repository) : super(HomeState()) {
     on<HomePageInitiated>((event, emit) async {
       print("HomeBloc _onHomePageInitiated");
@@ -20,9 +24,12 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
       emit(await _onHomePageLoadMore());
     });
     on<HomePageRefreshed>((event, emit) async {
+      //延迟2秒
+      await Future.delayed(const Duration(seconds: 5));
       emit(await _onHomePageRefreshed());
     });
   }
+
 
   // @override
   // Stream<HomeState> mapEventToState(
@@ -66,11 +73,15 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
 
   Future<HomeState> _onHomePageRefreshed() async {
     try {
+
+      print("HomeBloc (1)_onHomePageRefreshed:$_onHomePageRefreshed");
       List<BusinessItem> playList = await _repository.playlist("");
       // 获取数据后触发页面更新
+      onRefreshCompleted();
       return HomeState(playList: playList, hasMore: true);
     } catch (err) {
       addError(err, StackTrace.current);
+      onRefreshError(err);
       return HomeState(error: Exception(err));
     }
   }
