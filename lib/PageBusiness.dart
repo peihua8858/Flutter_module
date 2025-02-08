@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_module/BasePageWidget.dart';
@@ -7,6 +8,7 @@ import 'dart:convert';
 import 'BusinessItem.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+@RoutePage()
 class PageBusiness extends BasePageWidget {
   const PageBusiness(super.title, {super.key});
 

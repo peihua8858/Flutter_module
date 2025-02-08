@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_module/BasePageWidget.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+@RoutePage()
 class PageListView extends BasePageWidget {
   const PageListView(super.title, {super.key});
 

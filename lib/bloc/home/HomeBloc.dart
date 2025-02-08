@@ -11,8 +11,6 @@ import 'package:injectable/injectable.dart';
 @Injectable()
 @lazySingleton
 class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
-
-
   HomeBloc(this._repository) : super(HomeState()) {
     on<HomePageInitiated>((event, emit) async {
       print("HomeBloc _onHomePageInitiated");
@@ -29,7 +27,6 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
       emit(await _onHomePageRefreshed());
     });
   }
-
 
   // @override
   // Stream<HomeState> mapEventToState(
@@ -73,7 +70,6 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
 
   Future<HomeState> _onHomePageRefreshed() async {
     try {
-
       print("HomeBloc (1)_onHomePageRefreshed:$_onHomePageRefreshed");
       List<BusinessItem> playList = await _repository.playlist("");
       // 获取数据后触发页面更新
@@ -103,5 +99,11 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
   void onTransition(Transition<HomeEvent, HomeState> transition) {
     super.onTransition(transition);
     print("HomeBloc onTransition:$transition");
+  }
+
+  @override
+  Future<void> close() {
+    _repository.dispose();
+    return super.close();
   }
 }

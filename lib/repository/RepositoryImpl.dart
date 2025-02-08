@@ -17,4 +17,9 @@ class RepositoryImpl with LogMixin implements Repository {
     return result;
   }
 
+  @override
+  void dispose() {
+
+  }
+
 }

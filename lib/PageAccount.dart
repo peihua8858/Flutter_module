@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_module/BasePageWidget.dart';
-
+@RoutePage()
 class PageAccount extends BasePageWidget {
   const PageAccount(super.title, {super.key});
 

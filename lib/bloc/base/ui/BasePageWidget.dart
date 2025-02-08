@@ -29,7 +29,13 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
       }
     });
   }
-
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    bloc.close();
+    _scrollController.dispose();
+  }
   void onFtButtonClick() {
     print("onButtonClick");
     scrollController.animateTo(0,

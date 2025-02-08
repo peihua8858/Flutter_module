@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter_module/AppRouter.gr.dart';
+import 'package:flutter_module/bloc/DetailScreen.dart';
 import 'package:flutter_module/bloc/base/base_domain.dart';
 import 'package:flutter_module/bloc/home/HomeBloc.dart';
 import 'package:flutter_module/BusinessItem.dart';
@@ -5,6 +8,7 @@ import 'package:flutter_module/bloc/home/HomeState.dart';
 import 'package:flutter_module/bloc/home/HomeEvent.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+@RoutePage()
 class PageBloc extends BasePageWidget {
   const PageBloc(super.title, {super.key});
 
@@ -90,22 +94,35 @@ class _PageBlocState extends BasePageState<PageBloc, HomeBloc> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: GridTile(
-          footer: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black],
-                ),
-              ),
-              child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(item.title,
-                      style: TextStyle(fontSize: 20, color: Colors.white)))),
-          child: Image(image: Image.network(item.imageUrl).image)),
+      child: Stack(
+        children: [
+          GridTile(
+              footer: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.transparent, Colors.black],
+                    ),
+                  ),
+                  child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(item.title,
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.white)))),
+              child: Image(image: Image.network(item.imageUrl).image)),
+          Material(
+            type: MaterialType.transparency,
+            child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () {
+                  AutoRouter.of(context).push(DetailScreenRoute(item: item));
+                }),
+          )
+        ],
+      ),
     );
   }
 
@@ -115,28 +132,27 @@ class _PageBlocState extends BasePageState<PageBloc, HomeBloc> {
       return SizedBox(
           width: double.infinity, // 确保容器宽度充满
           child: SingleChildScrollView(
-            controller: scrollController,
+              controller: scrollController,
               child: StaggeredGrid.count(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            children: [
-              for (var index = 0; index < state.playList.length; index++)
-                StaggeredGridTile.fit(
-                    crossAxisCellCount: 1,
-                    child:itemViews(state.playList, index)),
-              if (state.hasMore)
-                StaggeredGridTile.fit(
-                    crossAxisCellCount: 3,
-                    child: Container(
-                      width: double.infinity, // 宽度撑满屏幕
-                      height: 100,
-                      color: Colors.transparent,
-                      child: Center(child: CircularProgressIndicator()),
-                    ))
-            ],
-          )));
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                children: [
+                  for (var index = 0; index < state.playList.length; index++)
+                    StaggeredGridTile.fit(
+                        crossAxisCellCount: 1,
+                        child: itemViews(state.playList, index)),
+                  if (state.hasMore)
+                    StaggeredGridTile.fit(
+                        crossAxisCellCount: 3,
+                        child: Container(
+                          width: double.infinity, // 宽度撑满屏幕
+                          height: 100,
+                          color: Colors.transparent,
+                          child: Center(child: CircularProgressIndicator()),
+                        ))
+                ],
+              )));
     });
   }
-
 }

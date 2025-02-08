@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_module/bloc/base/BaseBlocEvent.dart';
 import 'package:flutter_module/bloc/base/BaseBlocState.dart';
-import 'package:flutter_module/app/domain/domain.dart';
 import 'package:flutter_module/utils/LogMixin.dart';
 
+/// 基础bloc
+/// @author dingpeihua
+/// @date 2022/12/26
 abstract class BaseBloc<E extends BaseBlocEvent, S extends BaseBlocState>
     extends BaseBlocDelegate<E, S> with LogMixin {
   BaseBloc(S initialState) : super(initialState);
@@ -29,10 +31,10 @@ abstract class BaseBloc<E extends BaseBlocEvent, S extends BaseBlocState>
   }
 }
 
+/// 基础bloc
+/// @author dingpeihua
+///@date 2022/12/26
 abstract class BaseBlocDelegate<E extends BaseBlocEvent,
     S extends BaseBlocState> extends Bloc<E, S> {
   BaseBlocDelegate(S initialState) : super(initialState);
-
-  // 导航器对象
-  late final AppNavigator navigator;
 }

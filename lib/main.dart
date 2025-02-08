@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/router.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_module/main.config.dart';
-import 'package:injectable/injectable.dart';
-import 'MainScreen.dart';
 import 'package:get_it/get_it.dart';
-import 'bloc/home/HomeBloc.dart';
-import 'package:flutter_module/repository/Repository.dart';
+import 'package:injectable/injectable.dart';
+
+import 'AppRouter.dart';
+import 'MainScreen.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -14,37 +12,80 @@ GetIt locator = GetIt.instance;
 Future<void> configureDependencies() async => locator.init();
 
 @module
-abstract class AppModule {
-}
+abstract class AppModule {}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  runApp(const MyApp());
+  final AppRouter appRouter = AppRouter();
+  print(">>>>>>>>>>>>>>>>>>>>>main");
+  runApp(MainApp(appRouter: appRouter));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  final AppRouter appRouter;
+
+  const MainApp({super.key, required this.appRouter});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or press Run > Flutter Hot Reload in a Flutter IDE). Notice that the
-          // counter didn't reset back to zero; the application is not restarted.
-          primarySwatch: Colors.blue,
-        ),
-        routes: {
-          "home": (context) => const MainScreenPage(title: "home")
-        },
-        home: const MainScreenPage(title: 'Flutter Demo Home Page'));
+    print(">>>>>>>>>>>>>>>>>>>>>main MyApp build");
+    return MaterialApp.router(
+      // routerConfig:
+      // appRouter.config(navigatorObservers: () => [AppNavigatorObserver()]),
+      routerDelegate: appRouter.delegate(
+          navigatorObservers: () => [AppNavigatorObserver()]),
+      routeInformationParser: appRouter.defaultRouteParser(),
+      routeInformationProvider: appRouter.routeInfoProvider(),
+      backButtonDispatcher: RootBackButtonDispatcher(),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+    );
+  }
+}
+
+class AppNavigatorObserver extends NavigatorObserver {
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    print(">>>>>>>>>>>>>>>>>>>>>main didPop");
+    super.didPop(route, previousRoute);
+  }
+
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    print(">>>>>>>>>>>>>>>>>>>>>main didPush");
+    super.didPush(route, previousRoute);
+  }
+
+  @override
+  void didRemove(Route route, Route? previousRoute) {
+    print(">>>>>>>>>>>>>>>>>>>>>main didRemove");
+    super.didRemove(route, previousRoute);
+  }
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) {
+    print(">>>>>>>>>>>>>>>>>>>>>main didReplace");
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+  }
+
+  @override
+  void didStartUserGesture(Route route, Route? previousRoute) {
+    print(">>>>>>>>>>>>>>>>>>>>>main didStartUserGesture");
+    super.didStartUserGesture(route, previousRoute);
+  }
+
+  @override
+  void didStopUserGesture() {
+    print(">>>>>>>>>>>>>>>>>>>>>main didStopUserGesture");
+    super.didStopUserGesture();
+  }
+
+  @override
+  void didUpdateRoute(Route route) {
+    print(">>>>>>>>>>>>>>>>>>>>>main didUpdateRoute");
   }
 }
