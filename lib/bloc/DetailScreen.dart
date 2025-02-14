@@ -27,12 +27,24 @@ class DetailScreenState extends State<DetailScreen> {
         centerTitle: true,
         title: Text('Detail ${widget.item.title}'),
       ),
-      body: Center(
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: () {},
-          child: Padding(
-              padding: EdgeInsets.all(10.0), child: Text(widget.item.title)),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: Column(
+          children: [
+            Image(
+                image: Image.network(widget.item.imageUrl).image,
+                width: 500,
+                height: 500),
+            SizedBox(height: 10),
+            Material(
+                type: MaterialType.transparency,
+                child: InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(10),
+                    child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(widget.item.title)))),
+          ],
         ),
       ),
     );
