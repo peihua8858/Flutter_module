@@ -3,7 +3,7 @@ import 'package:flutter_module/AppRouter.gr.dart';
 import 'package:flutter_module/bloc/DetailScreen.dart';
 import 'package:flutter_module/bloc/base/base_domain.dart';
 import 'package:flutter_module/bloc/home/HomeBloc.dart';
-import 'package:flutter_module/BusinessItem.dart';
+import 'package:flutter_module/model/BusinessItem.dart';
 import 'package:flutter_module/bloc/home/HomeState.dart';
 import 'package:flutter_module/bloc/home/HomeEvent.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

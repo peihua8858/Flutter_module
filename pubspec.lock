@@ -5,23 +5,23 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "03f6da266a27a4538a69295ec142cb5717d7d4e5727b84658b63e1e1509bac9c"
+      sha256: c0555ee1c067778474ba494b969f833de1d9123802d9d11d055c2991dfaab5c2
       url: "https://pub.dev"
     source: hosted
-    version: "79.0.0"
+    version: "77.0.0"
   _macros:
     dependency: transitive
     description: dart
     source: sdk
     version: "0.3.3"
   analyzer:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: analyzer
-      sha256: c9040fc56483c22a5e04a9f6a251313118b1a3c42423770623128fa484115643
+      sha256: e58ba14f0baf226303f3503c7f30533fdbc03e264b096f37f9d1c5a9fe757513
       url: "https://pub.dev"
     source: hosted
-    version: "7.2.0"
+    version: "7.0.0"
   args:
     dependency: transitive
     description:
@@ -214,6 +214,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
+  extended_list:
+    dependency: "direct main"
+    description:
+      name: extended_list
+      sha256: fa7bcb2645b7d6849918d499fda6ea917cda85e43b2e06dfec2a29b649722974
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
+  extended_list_library:
+    dependency: transitive
+    description:
+      name: extended_list_library
+      sha256: cb424a04464e89bd6737f9ae025029bd8e913c7bf37101ad10c2defe0238d842
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -786,6 +802,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  waterfall_flow:
+    dependency: "direct main"
+    description:
+      name: waterfall_flow
+      sha256: e7ab5728fe536e53cf4b8ea97128112ad18c7f1d797d91f073bf396fa6910181
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   web:
     dependency: transitive
     description:

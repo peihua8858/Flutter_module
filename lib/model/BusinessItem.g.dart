@@ -6,13 +6,14 @@ part of 'BusinessItem.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BusinessItem _$BusinessItemFromJson(Map<String, dynamic> json) => BusinessItem(
-      json['ruleId'] as String?,
-      json['title'] as String,
-      json['imageUrl'] as String,
+_$BusinessItemImpl _$$BusinessItemImplFromJson(Map<String, dynamic> json) =>
+    _$BusinessItemImpl(
+      ruleId: json['ruleId'] as String?,
+      title: json['title'] as String,
+      imageUrl: json['imageUrl'] as String,
     );
 
-Map<String, dynamic> _$BusinessItemToJson(BusinessItem instance) =>
+Map<String, dynamic> _$$BusinessItemImplToJson(_$BusinessItemImpl instance) =>
     <String, dynamic>{
       'ruleId': instance.ruleId,
       'title': instance.title,

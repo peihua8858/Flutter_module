@@ -5,7 +5,7 @@ import 'package:flutter_module/bloc/base/BaseBloc.dart';
 import 'package:flutter_module/bloc/home/HomeEvent.dart';
 import 'package:flutter_module/bloc/home/HomeState.dart';
 import 'package:flutter_module/repository/Repository.dart';
-import 'package:flutter_module/BusinessItem.dart';
+import 'package:flutter_module/model/BusinessItem.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable()
@@ -49,6 +49,7 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
       // 获取数据后触发页面更新
       return HomeState(playList: playList, hasMore: true);
     } catch (err) {
+    print("33 HomeBloc _onHomePageInitiated err:$err");
       addError(err, StackTrace.current);
       return HomeState(error: Exception(err));
     }

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 
-import '../BusinessItem.dart';
+import '../model/BusinessItem.dart';
 import 'base/base_domain.dart';
 
 @RoutePage()

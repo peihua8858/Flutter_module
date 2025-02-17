@@ -37,6 +37,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
     return AutoTabsRouter(
         routes: [
           PageBlocRoute(title: 'Bloc框架'),
+          PageBloc3Route(title: 'Bloc2框架'),
           PageListViewRoute(title: '列表布局'),
           PageBusinessRoute(title: '网格布局'),
           PageSchoolRoute(title: '课程'),
@@ -68,6 +69,10 @@ class _MainScreenPageState extends State<MainScreenPage> {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.grid_view),
                   label: 'Bloc',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.grid_view),
+                  label: 'Bloc2',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.list_alt),

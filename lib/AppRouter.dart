@@ -16,6 +16,8 @@ class AppRouter extends RootStackRouter {
             // initial: true,
             children: [
               AutoRoute(page: PageBlocRoute.page, path: 'pageBloc'),
+              // AutoRoute(page: PageBloc2Route.page, path: 'pageBloc2'),
+              AutoRoute(page: PageBloc3Route.page, path: 'pageBloc3'),
               AutoRoute(page: PageListViewRoute.page, path: 'pageListView'),
               AutoRoute(page: PageBusinessRoute.page, path: 'pageBusiness'),
               AutoRoute(page: PageSchoolRoute.page, path: 'pageSchool'),

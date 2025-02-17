@@ -14,8 +14,7 @@ abstract class BasePageWidget extends StatefulWidget with LogMixin {
 abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
     extends State<T> with LogMixin {
   late final B bloc = GetIt.instance.get<B>();
-  final ScrollController _scrollController = ScrollController(); //listview的控制器
-  Widget buildBody(BuildContext context);
+  final ScrollController _scrollController = ScrollController();
 
   ScrollController get scrollController => _scrollController;
 
@@ -29,18 +28,21 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
       }
     });
   }
-@override
+
+  @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     bloc.close();
     _scrollController.dispose();
   }
+
   void onFtButtonClick() {
     print("onButtonClick");
     scrollController.animateTo(0,
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
+
+  Future<void> onRefresh() async => _onRefresh();
 
   Future<void> _onRefresh() async {
     print("onRefresh");
@@ -49,7 +51,7 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
   }
 
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return BlocProvider(
         lazy: false,
         create: (context) => bloc,
@@ -66,15 +68,19 @@ abstract class BasePageState<T extends BasePageWidget, B extends BaseBloc>
               ],
             ),
           ),
-          body: RefreshIndicator(
-            onRefresh: () => _onRefresh(),
-            child: buildBody(context),
-          ),
+          body: buildRefresh(context),
           floatingActionButton: FloatingActionButton.small(
             onPressed: onFtButtonClick,
-            tooltip: 'Increment',
             child: const Icon(Icons.arrow_upward),
           ),
         ));
   }
+  Widget buildRefresh(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () => onRefresh(),
+      child: buildBody(context),
+    );
+  }
+
+  Widget buildBody(BuildContext context);
 }

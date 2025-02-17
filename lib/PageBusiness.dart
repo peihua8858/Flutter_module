@@ -5,7 +5,7 @@ import 'package:flutter_module/BasePageWidget.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
-import 'BusinessItem.dart';
+import 'model/BusinessItem.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 @RoutePage()
